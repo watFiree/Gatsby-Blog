@@ -1,18 +1,16 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
+import { ThemeProvider, css } from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
-
+import { GlobalStyles } from "../styles/GlobalStyles"
+import { lightTheme, darkTheme } from "../styles/Theme"
 import Header from "./header"
-import "./layout.css"
 
 const Layout = ({ children }) => {
+  const [theme, setTheme] = useState("dark")
+  const toggleTheme = () => {
+    setTheme(prev => (prev == "dark" ? "light" : "dark"))
+  }
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -24,8 +22,13 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+    <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
+      <GlobalStyles />
+      <Header
+        siteTitle={data.site.siteMetadata.title}
+        theme={theme}
+        setTheme={toggleTheme}
+      />
       <div
         style={{
           margin: `0 auto`,
@@ -40,7 +43,7 @@ const Layout = ({ children }) => {
           <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
       </div>
-    </>
+    </ThemeProvider>
   )
 }
 
