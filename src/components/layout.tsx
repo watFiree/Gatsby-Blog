@@ -1,16 +1,15 @@
-import React, { useState } from "react"
-import PropTypes from "prop-types"
-import { ThemeProvider, css } from "styled-components"
-import { useStaticQuery, graphql } from "gatsby"
-import { GlobalStyles } from "../styles/GlobalStyles"
-import { lightTheme, darkTheme } from "../styles/Theme"
-import Header from "./header"
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { ThemeProvider, css } from "styled-components";
+import { useStaticQuery, graphql } from "gatsby";
+import { GlobalStyles } from "../styles/GlobalStyles";
+import { lightTheme, darkTheme } from "../styles/Theme";
+import Header from "./header";
+import Footer from "./footer";
+import useTheme from "../hooks/useTheme";
 
 const Layout = ({ children }) => {
-  const [theme, setTheme] = useState("dark")
-  const toggleTheme = () => {
-    setTheme(prev => (prev == "dark" ? "light" : "dark"))
-  }
+  const [theme, toggleTheme] = useTheme();
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -19,7 +18,7 @@ const Layout = ({ children }) => {
         }
       }
     }
-  `)
+  `);
 
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
@@ -32,23 +31,19 @@ const Layout = ({ children }) => {
       <div
         style={{
           margin: `0 auto`,
-          maxWidth: 960,
+          maxWidth: 1080,
           padding: `0 1.0875rem 1.45rem`,
         }}
       >
         <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
+        <Footer />
       </div>
     </ThemeProvider>
-  )
-}
+  );
+};
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
-export default Layout
+export default Layout;

@@ -1,7 +1,8 @@
+/// <reference types="styled-components/cssprop" />
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
-import ThemeToggler from "./themeToggler";
+import ThemeToggler from "./theme-toggler";
 import { Link } from "gatsby";
 import { FlexCenterAround, FlexCenterCenter } from "../utils/styled-flex";
 
@@ -47,10 +48,38 @@ const Header = ({ siteTitle, theme, setTheme }: HeaderProps) => (
         `}
       >
         <li>
-          <Link to="/articles">Articles</Link>
+          <Link
+            to="/articles"
+            css={css`
+              color: ${({ theme }) => theme.gray};
+              transition: color 0.4s ease;
+              &:hover {
+                color: inherit;
+              }
+              &:active {
+                color: orange;
+              }
+            `}
+          >
+            Articles
+          </Link>
         </li>
         <li>
-          <Link to="/about">About me</Link>
+          <Link
+            to="/about"
+            css={css`
+              color: ${({ theme }) => theme.gray};
+              transition: color 0.4s ease;
+              &:hover {
+                color: inherit;
+              }
+              &:active {
+                color: orange;
+              }
+            `}
+          >
+            About me
+          </Link>
         </li>
       </ul>
       <ThemeToggler theme={theme} setTheme={setTheme} />

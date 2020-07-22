@@ -26,7 +26,10 @@ const ThemeToggler = ({
   setTheme,
 }: {
   theme: "dark" | "light";
-  setTheme(): string;
-}) => <Button onClick={setTheme} themeMode={theme} />;
+  setTheme(): any;
+}) => {
+  console.log(theme, setTheme);
+  return <Button onClick={setTheme} themeMode={theme} />;
+};
 
 export default ThemeToggler;
