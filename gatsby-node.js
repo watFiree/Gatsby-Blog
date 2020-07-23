@@ -1,7 +1,28 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
+exports.createPages = async ({ graphql, actions }) => {
+  const ArticleTemplate = require.resolve("./src/templates/Article.tsx");
+  const result = await graphql(`
+    query {
+      allMdx {
+        nodes {
+          frontmatter {
+            slug
+          }
+        }
+      }
+    }
+  `);
 
-// You can delete this file if you're not using it
+  if (result.error) throw result.error;
+
+  const articles = result.data.allMdx.nodes;
+
+  articles.forEach(article => {
+    actions.createPage({
+      path: "/article/" + article.frontmatter.slug,
+      component: ArticleTemplate,
+      context: {
+        slug: article.frontmatter.slug,
+      },
+    });
+  });
+};

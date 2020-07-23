@@ -5,7 +5,7 @@ import GitHubIcon from "../assets/github.png";
 import { FlexCenterAround } from "../utils/styled-flex";
 
 const Wrapper = styled.footer`
-  margin-top: 2.1rem;
+  margin-top: 4.1rem;
   color: ${({ theme }) => theme.gray};
   display: flex;
   justify-content: space-between;

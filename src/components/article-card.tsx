@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { navigate } from "gatsby";
 import { FlexCenterCenterColumn, FlexCenterAround } from "../utils/styled-flex";
 import JSIcon from "../assets/js.png";
 
@@ -58,14 +59,14 @@ const Images = styled.div`
   ${FlexCenterAround};
 `;
 
-const ArticleCard = () => {
+const ArticleCard = ({ data }) => {
   return (
-    <Wrapper>
+    <Wrapper onClick={() => navigate(`/article/${data.frontmatter.slug}`)}>
       <Content>
-        <h2>title</h2>
-        <p>Text</p>
+        <h2>{data.frontmatter.title}</h2>
+        <p>{data.frontmatter.intro}</p>
       </Content>
-      <Divider></Divider>
+      <Divider />
       <Languages>
         <span>Languages:</span>
         <Images>

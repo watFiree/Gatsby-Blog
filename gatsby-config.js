@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Blog site`,
+    description: `Hello in my programming world !`,
+    author: `Karol Piotrowicz`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -10,10 +10,25 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-tslint`,
     {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        defaultLayouts: {
+          default: require.resolve("./src/components/layout.tsx"),
+        },
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `articles`,
+        path: `${__dirname}/src/articles`,
       },
     },
     `gatsby-transformer-sharp`,

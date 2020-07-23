@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "gatsby";
-import styled, { css } from "styled-components";
+import { graphql } from "gatsby";
+import styled from "styled-components";
 import Layout from "../components/layout";
-import ArticleCard from "../components/article-card";
+import ArticlesWrapper from "../components/articles-wrapper";
 import SEO from "../components/seo";
 import { FlexCenterAroundColumn } from "../utils/styled-flex";
+import { ArticleType } from "../utils/ArticleType";
 
 const Hero = styled.div`
   ${FlexCenterAroundColumn};
@@ -25,16 +26,7 @@ const Hero = styled.div`
   }
 `;
 
-const Articles = styled.div`
-  ${FlexCenterAroundColumn};
-  p {
-    font-size: 1.3rem;
-    color: ${({ theme }) => theme.gray};
-    align-self: flex-start;
-  }
-`;
-
-const IndexPage = () => (
+const IndexPage = ({ data }: { data: ArticleType }) => (
   <Layout>
     <SEO title="Home" />
     <Hero>
@@ -44,24 +36,23 @@ const IndexPage = () => (
         A student passionate <br /> in programming
       </p>
     </Hero>
-    <Articles>
-      <p>Newest articles: </p>
-      <ArticleCard />
-      <ArticleCard />
-      <ArticleCard />
-      <ArticleCard />
-      <Link
-        to="/articles"
-        css={css`
-          font-size: 1.1rem;
-          color: ${({ theme }) => theme.orange};
-          text-decoration: underline;
-        `}
-      >
-        More...
-      </Link>
-    </Articles>
+    <ArticlesWrapper data={data} main={true} />
   </Layout>
 );
+
+export const query = graphql`
+  query {
+    allMdx(limit: 5) {
+      nodes {
+        frontmatter {
+          title
+          languages
+          intro
+          slug
+        }
+      }
+    }
+  }
+`;
 
 export default IndexPage;
