@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { graphql } from "gatsby";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Image from "gatsby-image";
 import Layout from "../components/layout";
 import ArticlesWrapper from "../components/articles-wrapper";
@@ -33,23 +33,27 @@ const Content = styled.div`
   }
 `;
 
-const IndexPage = ({ data }: { data: ArticlesType }) => (
-  <Layout>
-    <SEO title="Home" />
-    <Hero>
-      <Content>
-        <span>Hello</span>
-        <h2>I'm Karol</h2>
-        <p>
-          A student passionate <br /> in programming
-        </p>
-      </Content>
-      <Image fixed={data.image.sharp.fixed} alt="Hero" />
-      {console.log(data)}
-    </Hero>
-    <ArticlesWrapper data={data.articles} main={true} />
-  </Layout>
-);
+const IndexPage = ({ data }: { data: ArticlesType }) => {
+  const [width, setWidth] = useState<number>(window.innerWidth);
+  window.addEventListener("resize", e => setWidth(e.target.innerWidth));
+  return (
+    <Layout>
+      <SEO title="Home" />
+      <Hero>
+        <Content>
+          <span>Hello</span>
+          <h2>I'm Karol</h2>
+          <p>
+            A student passionate <br /> in programming
+          </p>
+        </Content>
+        {console.log(window.innerWidth)}
+        {width > 750 && <Image fixed={data.image.sharp.fixed} alt="Hero" css={css``} />}
+      </Hero>
+      <ArticlesWrapper data={data.articles} main={true} />
+    </Layout>
+  );
+};
 
 export const query = graphql`
   query {

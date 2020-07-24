@@ -4,8 +4,8 @@ import Sun from "../assets/sun.svg";
 import Moon from "../assets/moon.svg";
 
 const Button = styled.button`
-  height: 44px;
-  width: 44px;
+  height: 44px !important;
+  width: 44px !important;
   outline: none;
   border: none;
   padding: 0;

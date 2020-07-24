@@ -1,4 +1,4 @@
-/// <reference types="styled-components/cssprop" />
+///<reference types="styled-components/cssprop" />
 import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
@@ -32,6 +32,18 @@ const Header = ({ siteTitle, theme, setTheme }: HeaderProps) => (
         ${FlexCenterCenter};
         width: 40%;
         margin: 0;
+        @media (max-width: 1150px) {
+          width: 60%;
+        }
+        @media (max-width: 800px) {
+          width: 80%;
+        }
+        @media (max-width: 450px) {
+          width: 90%;
+        }
+        @media (max-width: 300px) {
+          width: 100%;
+        }
       `}
     >
       <ul
@@ -42,6 +54,10 @@ const Header = ({ siteTitle, theme, setTheme }: HeaderProps) => (
           justify-content: space-evenly;
           margin: 0;
           list-style: none;
+          padding: 0;
+          @media (max-width: 350px) {
+            justify-content: space-between;
+          }
           li {
             margin: 0;
           }
@@ -53,6 +69,7 @@ const Header = ({ siteTitle, theme, setTheme }: HeaderProps) => (
             css={css`
               color: ${({ theme }) => theme.gray};
               transition: color 0.4s ease;
+              text-align: center;
               &:hover {
                 color: inherit;
               }

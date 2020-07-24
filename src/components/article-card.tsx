@@ -16,6 +16,9 @@ const Wrapper = styled.div`
     -moz-box-shadow: 0px 0px 15px 5px rgba(61, 61, 61, 0.5);
     box-shadow: 0px 0px 15px 5px rgba(61, 61, 61, 0.5);
   }
+  @media (max-width: 500px) {
+    min-height: 200px;
+  }
 `;
 
 const Content = styled.div`
@@ -57,6 +60,9 @@ const Images = styled.div`
   height: 70%;
   width: 80%;
   ${FlexCenterAround};
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
 `;
 
 const ArticleCard = ({ data }) => {
