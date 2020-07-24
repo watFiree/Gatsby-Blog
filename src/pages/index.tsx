@@ -31,29 +31,40 @@ const Content = styled.div`
     margin: 0;
     font-size: 1.3rem;
   }
+  @media (max-width: 750px) {
+    min-width: 400px;
+    max-width: 100%;
+  }
+  @media (max-width: 400px) {
+    max-width: 400px;
+    min-width: 200px;
+  }
 `;
 
-const IndexPage = ({ data }: { data: ArticlesType }) => {
-  const [width, setWidth] = useState<number>(window.innerWidth);
-  window.addEventListener("resize", e => setWidth(e.target.innerWidth));
-  return (
-    <Layout>
-      <SEO title="Home" />
-      <Hero>
-        <Content>
-          <span>Hello</span>
-          <h2>I'm Karol</h2>
-          <p>
-            A student passionate <br /> in programming
-          </p>
-        </Content>
-        {console.log(window.innerWidth)}
-        {width > 750 && <Image fixed={data.image.sharp.fixed} alt="Hero" css={css``} />}
-      </Hero>
-      <ArticlesWrapper data={data.articles} main={true} />
-    </Layout>
-  );
-};
+const IndexPage = ({ data }: { data: ArticlesType }) => (
+  <Layout>
+    <SEO title="Home" />
+    <Hero>
+      <Content>
+        <span>Hello</span>
+        <h2>I'm Karol</h2>
+        <p>
+          A student passionate <br /> in programming
+        </p>
+      </Content>
+      <Image
+        fixed={data.image.sharp.fixed}
+        alt="Hero"
+        css={css`
+          @media (max-width: 750px) {
+            opacity: 0;
+          }
+        `}
+      />
+    </Hero>
+    <ArticlesWrapper data={data.articles} main={true} />
+  </Layout>
+);
 
 export const query = graphql`
   query {

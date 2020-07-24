@@ -98,7 +98,7 @@ const ArticleCard = ({ data }) => {
         <Images>
           {languages.map((language: string) =>
             icons[language] !== undefined ? (
-              <Image fixed={icons[language].sharp.fixed} alt={language} />
+              <Image key={language} fixed={icons[language].sharp.fixed} alt={language} />
             ) : null
           )}
         </Images>

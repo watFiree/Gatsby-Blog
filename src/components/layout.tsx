@@ -7,6 +7,7 @@ import { lightTheme, darkTheme } from "../styles/Theme";
 import Header from "./header";
 import Footer from "./footer";
 import useTheme from "../hooks/useTheme";
+import SEO from "./seo";
 
 const Layout = ({ children }) => {
   const [theme, toggleTheme] = useTheme();
@@ -22,6 +23,7 @@ const Layout = ({ children }) => {
 
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
+      <SEO />
       <GlobalStyles />
       <Header siteTitle={data.site.siteMetadata.title} theme={theme} setTheme={toggleTheme} />
       <div

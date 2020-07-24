@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { graphql, useStaticQuery } from "gatsby";
 import Image from "gatsby-image";
-import NetlifyIcon from "../assets/netlify.png";
-import GitHubIcon from "../assets/github.png";
 import { FlexCenterAround } from "../utils/styled-flex";
 
 const Wrapper = styled.footer`
