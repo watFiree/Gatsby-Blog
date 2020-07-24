@@ -1,16 +1,23 @@
 import React from "react";
 import { graphql } from "gatsby";
 import styled from "styled-components";
+import Image from "gatsby-image";
 import Layout from "../components/layout";
 import ArticlesWrapper from "../components/articles-wrapper";
 import SEO from "../components/seo";
-import { FlexCenterAroundColumn } from "../utils/styled-flex";
-import { ArticleType } from "../utils/ArticleType";
+import { FlexCenterCenterColumn } from "../utils/styled-flex";
+import { ArticlesType } from "../utils/ArticleType";
 
 const Hero = styled.div`
-  ${FlexCenterAroundColumn};
-  align-items: flex-start;
+  display: flex;
   padding: 5% 0;
+  width: 100%;
+  justify-content: space-between;
+`;
+
+const Content = styled.div`
+  ${FlexCenterCenterColumn};
+  align-items: flex-start;
   span {
     text-transform: uppercase;
     color: ${({ theme }) => theme.orange};
@@ -26,29 +33,40 @@ const Hero = styled.div`
   }
 `;
 
-const IndexPage = ({ data }: { data: ArticleType }) => (
+const IndexPage = ({ data }: { data: ArticlesType }) => (
   <Layout>
     <SEO title="Home" />
     <Hero>
-      <span>Hello</span>
-      <h2>I'm Karol</h2>
-      <p>
-        A student passionate <br /> in programming
-      </p>
+      <Content>
+        <span>Hello</span>
+        <h2>I'm Karol</h2>
+        <p>
+          A student passionate <br /> in programming
+        </p>
+      </Content>
+      <Image fixed={data.image.sharp.fixed} alt="Hero" />
+      {console.log(data)}
     </Hero>
-    <ArticlesWrapper data={data} main={true} />
+    <ArticlesWrapper data={data.articles} main={true} />
   </Layout>
 );
 
 export const query = graphql`
   query {
-    allMdx(limit: 5) {
+    articles: allMdx(limit: 5) {
       nodes {
         frontmatter {
           title
           languages
           intro
           slug
+        }
+      }
+    }
+    image: file(relativePath: { eq: "hero.png" }) {
+      sharp: childImageSharp {
+        fixed(height: 350) {
+          ...GatsbyImageSharpFixed_tracedSVG
         }
       }
     }

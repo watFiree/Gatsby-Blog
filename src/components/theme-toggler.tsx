@@ -21,15 +21,7 @@ const Button = styled.button`
   }
 `;
 
-const ThemeToggler = ({
-  theme,
-  setTheme,
-}: {
-  theme: "dark" | "light";
-  setTheme(): any;
-}) => {
-  console.log(theme, setTheme);
-  return <Button onClick={setTheme} themeMode={theme} />;
-};
-
+const ThemeToggler = ({ theme, setTheme }: { theme: "dark" | "light"; setTheme(): any }) => (
+  <Button onClick={setTheme} themeMode={theme} />
+);
 export default ThemeToggler;

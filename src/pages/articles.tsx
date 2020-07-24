@@ -8,14 +8,14 @@ const Articles = ({ data }: { data: ArticlesType }) => {
   return (
     <Layout>
       <h1>Hello articles</h1>
-      <ArticlesWrapper title="All articles:" data={data} />
+      <ArticlesWrapper title="All articles:" data={data.articles} />
     </Layout>
   );
 };
 
 export const query = graphql`
   query {
-    allMdx {
+    articles: allMdx {
       nodes {
         frontmatter {
           title

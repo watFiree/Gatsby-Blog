@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { navigate } from "gatsby";
+import { navigate, graphql, useStaticQuery } from "gatsby";
+import Image from "gatsby-image";
 import { FlexCenterCenterColumn, FlexCenterAround } from "../utils/styled-flex";
-import JSIcon from "../assets/js.png";
 
 const Wrapper = styled.div`
   background-color: #111;
@@ -60,6 +60,26 @@ const Images = styled.div`
 `;
 
 const ArticleCard = ({ data }) => {
+  const languages: string[] = data.frontmatter.languages.split(" ");
+  const icons = useStaticQuery(graphql`
+    query {
+      js: file(relativePath: { eq: "js.png" }) {
+        sharp: childImageSharp {
+          fixed(width: 50) {
+            ...GatsbyImageSharpFixed_tracedSVG
+          }
+        }
+      }
+      react: file(relativePath: { eq: "react.png" }) {
+        sharp: childImageSharp {
+          fixed(width: 65) {
+            ...GatsbyImageSharpFixed_tracedSVG
+          }
+        }
+      }
+    }
+  `);
+
   return (
     <Wrapper onClick={() => navigate(`/article/${data.frontmatter.slug}`)}>
       <Content>
@@ -70,7 +90,11 @@ const ArticleCard = ({ data }) => {
       <Languages>
         <span>Languages:</span>
         <Images>
-          <img src={JSIcon} />
+          {languages.map((language: string) =>
+            icons[language] !== undefined ? (
+              <Image fixed={icons[language].sharp.fixed} alt={language} />
+            ) : null
+          )}
         </Images>
       </Languages>
     </Wrapper>

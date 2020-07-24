@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { graphql, useStaticQuery } from "gatsby";
+import Image from "gatsby-image";
 import NetlifyIcon from "../assets/netlify.png";
 import GitHubIcon from "../assets/github.png";
 import { FlexCenterAround } from "../utils/styled-flex";
@@ -27,15 +29,35 @@ const Icons = styled.div`
 `;
 
 const Footer = () => {
+  const { netlify, github } = useStaticQuery(graphql`
+    query {
+      netlify: file(relativePath: { eq: "netlify.png" }) {
+        sharp: childImageSharp {
+          fixed(width: 40) {
+            ...GatsbyImageSharpFixed_tracedSVG
+          }
+        }
+      }
+      github: file(relativePath: { eq: "github.png" }) {
+        sharp: childImageSharp {
+          fixed(width: 40) {
+            ...GatsbyImageSharpFixed_tracedSVG
+          }
+        }
+      }
+    }
+  `);
+
+  console.log(netlify, github);
   return (
     <Wrapper>
       <p>Karol Piotrowicz © 2020</p>
       <Icons>
         <a href="https://www.netlify.com/" target="_blank">
-          <img src={NetlifyIcon} alt="Netlify" />
+          <Image fixed={netlify.sharp.fixed} alt="Netlify" />
         </a>
         <a href="https://github.com/watFiree/Gatsby-Blog" target="_blank">
-          <img src={GitHubIcon} alt="GitHub" />
+          <Image fixed={github.sharp.fixed} alt="GitHub" />
         </a>
       </Icons>
     </Wrapper>
@@ -43,7 +65,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-{
-  /* //css={css` &::before { content: "Deployed on Netlify" position: absolute;  top: 0; right: 0;}`} */
-}

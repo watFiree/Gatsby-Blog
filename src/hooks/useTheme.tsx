@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 
+type Theme = "dark" | "light";
+
 const useTheme = () => {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState<Theme>("dark");
   useEffect(() => {
-    const lastTheme: "dark" | "light" = localStorage.getItem("theme");
+    const lastTheme: any = localStorage.getItem("theme");
     if (lastTheme) setTheme(lastTheme);
   }, []);
   const toggleTheme = () => {

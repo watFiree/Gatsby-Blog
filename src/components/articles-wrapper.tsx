@@ -32,12 +32,12 @@ const Articles = ({
   title?: string;
   main?: boolean;
 }) => {
-  const articles = data.allMdx.nodes;
+  const articles = data.nodes;
   return (
     <Wrapper>
       <p>{title}</p>
       {articles?.map((article: Article) => (
-        <ArticleCard data={article} />
+        <ArticleCard key={article.frontmatter.slug} data={article} />
       ))}
       {main && (
         <Link

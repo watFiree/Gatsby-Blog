@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { ThemeProvider, css } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import { useStaticQuery, graphql } from "gatsby";
 import { GlobalStyles } from "../styles/GlobalStyles";
 import { lightTheme, darkTheme } from "../styles/Theme";
@@ -23,11 +23,7 @@ const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <GlobalStyles />
-      <Header
-        siteTitle={data.site.siteMetadata.title}
-        theme={theme}
-        setTheme={toggleTheme}
-      />
+      <Header siteTitle={data.site.siteMetadata.title} theme={theme} setTheme={toggleTheme} />
       <div
         style={{
           margin: `0 auto`,
