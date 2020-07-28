@@ -1,16 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 
 type Theme = "dark" | "light";
 
+enum mode {
+  dark = "dark",
+  light = "light",
+}
+
 const useTheme = () => {
   const [theme, setTheme] = useState<Theme>("dark");
-  useEffect(() => {
+  useLayoutEffect(() => {
     const lastTheme: any = localStorage.getItem("theme");
-    if (lastTheme) setTheme(lastTheme);
-  }, []);
+    if (lastTheme !== theme) setTheme(lastTheme);
+  }, [theme]);
   const toggleTheme = () => {
-    setTheme(prev => (prev == "dark" ? "light" : "dark"));
-    localStorage.setItem("theme", theme == "dark" ? "light" : "dark");
+    setTheme(prev => (prev === mode.dark ? mode.light : mode.dark));
+    localStorage.setItem("theme", theme === mode.dark ? mode.light : mode.dark);
   };
 
   return [theme, toggleTheme];
