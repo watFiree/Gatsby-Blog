@@ -1,5 +1,5 @@
 ///<reference types="styled-components/cssprop" />
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import ThemeToggler from "./theme-toggler";
@@ -7,10 +7,9 @@ import { Link } from "gatsby";
 import { FlexCenterAround, FlexCenterCenter } from "../utils/styled-flex";
 
 const Wrapper = styled.header`
-  background-color: inherit;
-  margin-bottom: 40px;
+  background-color: ${({ theme }) => theme.body};
   ${FlexCenterAround};
-  padding: 1.1rem;
+  padding: 1.4rem 0.8rem;
   h1 {
     margin: 0;
   }

@@ -5,7 +5,7 @@ import Image from "gatsby-image";
 import { FlexCenterCenterColumn, FlexCenterAround } from "../utils/styled-flex";
 
 const Wrapper = styled.div`
-  background-color: #111;
+  background-color: ${({ theme }) => theme.darkBody};
   width: 100%;
   display: flex;
   margin-bottom: 1.6rem;
@@ -34,6 +34,7 @@ const Content = styled.div`
   p {
     margin: 0;
     font-size: 1.3rem;
+    color: ${({ theme }) => theme.gray};
   }
 `;
 

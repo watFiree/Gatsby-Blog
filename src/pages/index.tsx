@@ -43,7 +43,6 @@ const Content = styled.div`
 
 const IndexPage = ({ data }: { data: ArticlesType }) => (
   <Layout>
-    <SEO title="Home" />
     <Hero>
       <Content>
         <span>Hello</span>
