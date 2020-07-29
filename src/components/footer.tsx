@@ -46,7 +46,6 @@ const Footer = () => {
     }
   `);
 
-  console.log(netlify, github);
   return (
     <Wrapper>
       <p>Karol Piotrowicz © 2020</p>

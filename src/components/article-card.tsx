@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { navigate, graphql, useStaticQuery } from "gatsby";
 import Image from "gatsby-image";
 import { FlexCenterCenterColumn, FlexCenterAround } from "../utils/styled-flex";
+import { ArticleType } from "../utils/ArticleType";
 
 const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.darkBody};
@@ -66,7 +67,7 @@ const Images = styled.div`
   }
 `;
 
-const ArticleCard = ({ data }) => {
+const ArticleCard = ({ data }: ArticleType) => {
   const languages: string[] = data.frontmatter.languages.split(" ");
   const icons = useStaticQuery(graphql`
     query {

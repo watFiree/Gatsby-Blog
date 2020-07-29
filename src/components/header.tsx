@@ -1,10 +1,10 @@
-///<reference types="styled-components/cssprop" />
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import ThemeToggler from "./theme-toggler";
 import { Link } from "gatsby";
 import { FlexCenterAround, FlexCenterCenter } from "../utils/styled-flex";
+import { ThemeTypes } from "../styles/Theme";
 
 const Wrapper = styled.header`
   background-color: ${({ theme }) => theme.body};
@@ -15,91 +15,77 @@ const Wrapper = styled.header`
   }
 `;
 
+const StyledNavigation = styled.nav`
+  ${FlexCenterCenter};
+  width: 40%;
+  margin: 0;
+  @media (max-width: 1150px) {
+    width: 60%;
+  }
+  @media (max-width: 800px) {
+    width: 80%;
+  }
+  @media (max-width: 450px) {
+    width: 90%;
+  }
+  @media (max-width: 300px) {
+    width: 100%;
+  }
+`;
+
+const StyledList = styled.ul`
+  ${FlexCenterAround};
+  width: 100%;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  @media (max-width: 350px) {
+    justify-content: space-between;
+  }
+  li {
+    margin: 0;
+  }
+`;
+
+const NavLink = styled(Link)`
+  color: ${({ theme, active }: { theme: ThemeTypes; active: boolean }) =>
+    active ? theme.orange : theme.gray};
+  transition: color 0.4s ease;
+  text-align: center;
+  &:hover {
+    color: ${({ theme }) => theme.orange};
+  }
+`;
+
 interface HeaderProps {
   siteTitle: string;
   theme: "dark" | "light";
-  setTheme(): string;
+  setTheme(): any;
+  uri: string;
 }
 
-const Header = ({ siteTitle, theme, setTheme }: HeaderProps) => (
+const Header = ({ theme, setTheme, uri }: HeaderProps) => (
   <Wrapper>
     <h1>
       <Link to="/">Logo</Link>
     </h1>
-    <nav
-      css={css`
-        ${FlexCenterCenter};
-        width: 40%;
-        margin: 0;
-        @media (max-width: 1150px) {
-          width: 60%;
-        }
-        @media (max-width: 800px) {
-          width: 80%;
-        }
-        @media (max-width: 450px) {
-          width: 90%;
-        }
-        @media (max-width: 300px) {
-          width: 100%;
-        }
-      `}
-    >
-      <ul
-        css={css`
-          ${FlexCenterAround};
-          width: 100%;
-          align-items: center;
-          justify-content: space-evenly;
-          margin: 0;
-          list-style: none;
-          padding: 0;
-          @media (max-width: 350px) {
-            justify-content: space-between;
-          }
-          li {
-            margin: 0;
-          }
-        `}
-      >
+    <StyledNavigation>
+      <StyledList>
         <li>
-          <Link
-            to="/articles"
-            css={css`
-              color: ${({ theme }) => theme.gray};
-              transition: color 0.4s ease;
-              text-align: center;
-              &:hover {
-                color: inherit;
-              }
-              &:active {
-                color: orange;
-              }
-            `}
-          >
+          <NavLink to="/articles" active={uri === "/articles"}>
             Articles
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link
-            to="/about"
-            css={css`
-              color: ${({ theme }) => theme.gray};
-              transition: color 0.4s ease;
-              &:hover {
-                color: inherit;
-              }
-              &:active {
-                color: orange;
-              }
-            `}
-          >
+          <NavLink to="/about" active={uri === "/about"}>
             About me
-          </Link>
+          </NavLink>
         </li>
-      </ul>
+      </StyledList>
       <ThemeToggler theme={theme} setTheme={setTheme} />
-    </nav>
+    </StyledNavigation>
   </Wrapper>
 );
 

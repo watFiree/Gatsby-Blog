@@ -8,7 +8,7 @@ enum mode {
 }
 
 const useTheme = () => {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>(mode.dark);
   useLayoutEffect(() => {
     const lastTheme: any = localStorage.getItem("theme");
     if (lastTheme !== theme) setTheme(lastTheme);

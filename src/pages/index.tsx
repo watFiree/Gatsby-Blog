@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { graphql } from "gatsby";
 import styled, { css } from "styled-components";
 import Image from "gatsby-image";
 import Layout from "../components/layout";
 import ArticlesWrapper from "../components/articles-wrapper";
-import SEO from "../components/seo";
 import { FlexCenterCenterColumn } from "../utils/styled-flex";
 import { ArticlesType } from "../utils/ArticleType";
 
@@ -41,7 +40,23 @@ const Content = styled.div`
   }
 `;
 
-const IndexPage = ({ data }: { data: ArticlesType }) => (
+interface IndexProps {
+  data: {
+    articles: ArticlesType;
+    image: {
+      sharp: {
+        fixed: {
+          height: number;
+          src: string;
+          srcSet: string;
+          width: number;
+        };
+      };
+    };
+  };
+}
+
+const IndexPage = ({ data }: IndexProps) => (
   <Layout>
     <Hero>
       <Content>

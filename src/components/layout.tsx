@@ -1,7 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { ReactNode } from "react";
 import { ThemeProvider } from "styled-components";
-import { useStaticQuery, graphql } from "gatsby";
 import { GlobalStyles } from "../styles/GlobalStyles";
 import { lightTheme, darkTheme } from "../styles/Theme";
 import Header from "./header";
@@ -9,23 +7,13 @@ import Footer from "./footer";
 import useTheme from "../hooks/useTheme";
 import SEO from "./seo";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, uri }: { children: ReactNode; uri: string }) => {
   const [theme, toggleTheme] = useTheme();
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `);
-
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
       <SEO />
       <GlobalStyles />
-      <Header siteTitle={data.site.siteMetadata.title} theme={theme} setTheme={toggleTheme} />
+      <Header theme={theme} setTheme={toggleTheme} uri={uri} />
       <div
         style={{
           margin: `0 auto`,
@@ -38,10 +26,6 @@ const Layout = ({ children }) => {
       </div>
     </ThemeProvider>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default Layout;

@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 import { Link } from "gatsby";
 import ArticleCard from "./article-card";
 import { FlexCenterAroundColumn } from "../utils/styled-flex";
-import { ArticlesType } from "../utils/ArticleType";
 
 const Wrapper = styled.div`
   ${FlexCenterAroundColumn};
@@ -14,7 +13,7 @@ const Wrapper = styled.div`
   }
 `;
 
-interface Article {
+interface frontmatter {
   frontmatter: {
     title: string;
     languages: string;
@@ -22,13 +21,16 @@ interface Article {
     slug: string;
   };
 }
+interface Articles {
+  nodes: [frontmatter];
+}
 
 const Articles = ({
   data,
   title = "Newest articles:",
   main = false,
 }: {
-  data: ArticlesType;
+  data: Articles;
   title?: string;
   main?: boolean;
 }) => {
@@ -36,7 +38,7 @@ const Articles = ({
   return (
     <Wrapper>
       <p>{title}</p>
-      {articles?.map((article: Article) => (
+      {articles?.map((article: frontmatter) => (
         <ArticleCard key={article.frontmatter.slug} data={article} />
       ))}
       {main && (

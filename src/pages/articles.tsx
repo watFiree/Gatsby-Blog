@@ -4,9 +4,16 @@ import { graphql } from "gatsby";
 import ArticlesWrapper from "../components/articles-wrapper";
 import { ArticlesType } from "../utils/ArticleType";
 
-const Articles = ({ data }: { data: ArticlesType }) => {
+interface ArticlesProps {
+  data: {
+    articles: ArticlesType;
+  };
+  location: { pathname: string };
+}
+
+const Articles = ({ data, location }: ArticlesProps) => {
   return (
-    <Layout>
+    <Layout uri={location.pathname}>
       <h1>Hello articles</h1>
       <ArticlesWrapper title="All articles:" data={data.articles} />
     </Layout>
