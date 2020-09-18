@@ -50,10 +50,10 @@ const Footer = () => {
     <Wrapper>
       <p>Karol Piotrowicz © 2020</p>
       <Icons>
-        <a href="https://www.netlify.com/" target="_blank">
+        <a href="https://www.netlify.com/" target="_blank" rel="noreferrer">
           <Image fixed={netlify.sharp.fixed} alt="Netlify" />
         </a>
-        <a href="https://github.com/watFiree/Gatsby-Blog" target="_blank">
+        <a href="https://github.com/watFiree/Gatsby-Blog" target="_blank" rel="noreferrer">
           <Image fixed={github.sharp.fixed} alt="GitHub" />
         </a>
       </Icons>
